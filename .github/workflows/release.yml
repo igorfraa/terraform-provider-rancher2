@@ -32,6 +32,14 @@ jobs:
         with:
           go-version-file: 'go.mod'
           cache: true
+      - name: debug
+        shell: bash
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+        run: |
+          echo ${GPG_PRIVATE_KEY} | md5sum
+          echo ${PASSPHRASE} | md5sum
       -
         name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@111c56156bcc6918c056dbef52164cfa583dc549 # v5.2.0
